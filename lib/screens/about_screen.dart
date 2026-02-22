@@ -4,6 +4,13 @@ import '../widgets/nav_bar.dart';
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
+  static const List<Map<String, Object>> _techStack = [
+    {'title': 'Flutter 3.x', 'subtitle': 'Cross-platform UI framework', 'icon': Icons.flutter_dash},
+    {'title': 'AWS Amplify', 'subtitle': 'CI/CD and hosting platform', 'icon': Icons.cloud},
+    {'title': 'Dart 3.x', 'subtitle': 'Modern, type-safe language', 'icon': Icons.code},
+    {'title': 'Material 3', 'subtitle': 'Latest Google design system', 'icon': Icons.design_services},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -19,7 +26,10 @@ class AboutScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('About', style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  'About',
+                  style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 8),
                 Divider(color: colorScheme.primary, thickness: 3, endIndent: 700),
                 const SizedBox(height: 24),
@@ -30,14 +40,12 @@ class AboutScreen extends StatelessWidget {
                   style: textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 32),
-                Text('Tech Stack', style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  'Tech Stack',
+                  style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 16),
-                ...[
-                  ('Flutter 3.x', 'Cross-platform UI framework', Icons.flutter_dash),
-                  ('AWS Amplify', 'CI/CD and hosting platform', Icons.cloud),
-                  ('Dart 3.x', 'Modern, type-safe language', Icons.code),
-                  ('Material 3', 'Latest Google design system', Icons.design_services),
-                ].map(
+                ..._techStack.map(
                   (item) => Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Row(
@@ -48,14 +56,27 @@ class AboutScreen extends StatelessWidget {
                             color: colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Icon(item.$3, color: colorScheme.primary),
+                          child: Icon(
+                            item['icon'] as IconData,
+                            color: colorScheme.primary,
+                          ),
                         ),
                         const SizedBox(width: 16),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.$1, style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-                            Text(item.$2, style: textTheme.bodyMedium?.copyWith(color: Colors.grey)),
+                            Text(
+                              item['title'] as String,
+                              style: textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              item['subtitle'] as String,
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: Colors.grey,
+                              ),
+                            ),
                           ],
                         ),
                       ],
